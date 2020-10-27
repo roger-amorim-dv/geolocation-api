@@ -1,6 +1,6 @@
 package com.geolocation.client
 
-import com.fasterxml.jackson.databind.JsonNode
+import com.geolocation.domain.Response
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -18,13 +18,13 @@ class GoogleMapsClient(webClient: WebClient.Builder) {
     @Value("\${envs.appkey}")
     lateinit var appKey: String
 
-    fun getAddress(address : String) : Mono<JsonNode> {
+    fun getAddress(address : String) : Mono<Response> {
         return webClientBuilder
                 .get()
                 .uri("/json?address=$address&key=$appKey")
                 .accept(APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(JsonNode::class.java).doOnSuccess{
+                .bodyToMono(Response::class.java).doOnSuccess{
                     log.info("Success operation")
                 }
     }

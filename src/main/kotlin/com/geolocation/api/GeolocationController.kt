@@ -22,8 +22,8 @@ class GeolocationController {
     private lateinit var geolocationService: GeolocationService
 
     @PostMapping
-    fun getBetterRoutes(@RequestBody listAddress : Geolocation) : Mono<Distance> {
+    fun getBetterRoutes(@RequestBody addressList: Geolocation) : Mono<Distance> {
         log.info("[API-CALCULATE-GEOLOCATION] starting calculation geolocation")
-        return geolocationService.processGeolocation(listAddress.addressList)
+        return geolocationService.processGeolocation(addressList.addressList)
     }
 }
